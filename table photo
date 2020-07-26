@@ -1,0 +1,24 @@
+CREATE TABLE `photo` (
+  `id_photo` int NOT NULL AUTO_INCREMENT,
+  `id_product` int NOT NULL,
+  `photo_file` blob NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_photo`),
+  KEY `fk_id_product_idx` (`id_product`),
+  CONSTRAINT `fk_id_product` FOREIGN KEY (`id_product`) REFERENCES `product` (`id_product`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Fotos de los productos';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `photo_BEFORE_INSERT` BEFORE INSERT ON `photo` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `photo_BEFORE_UPDATE` BEFORE UPDATE ON `photo` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
