@@ -1,0 +1,23 @@
+CREATE TABLE `purchase_history` (
+  `id_purchase_history` int NOT NULL AUTO_INCREMENT,
+  `id_app_user` varchar(45) NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_purchase_history`),
+  UNIQUE KEY `id_app_user_UNIQUE` (`id_app_user`),
+  CONSTRAINT `fk_history_app_user` FOREIGN KEY (`id_app_user`) REFERENCES `app_user` (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Historial de compras del usuario';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `purchase_history_BEFORE_INSERT` BEFORE INSERT ON `purchase_history` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `purchase_history_BEFORE_UPDATE` BEFORE UPDATE ON `purchase_history` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
