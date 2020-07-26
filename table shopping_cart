@@ -1,0 +1,30 @@
+CREATE TABLE `shopping_cart` (
+  `id_shopping_cart` int NOT NULL AUTO_INCREMENT,
+  `id_pay_method` int DEFAULT NULL,
+  `id_app_user` varchar(45) NOT NULL,
+  `id_purchase_history` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_shopping_cart`),
+  UNIQUE KEY `id_app_user_UNIQUE` (`id_app_user`),
+  UNIQUE KEY `id_purchase_history_UNIQUE` (`id_purchase_history`),
+  KEY `fk_id_pay_method_idx` (`id_pay_method`),
+  KEY `fk_id_app_user_idx` (`id_app_user`),
+  CONSTRAINT `fk_id_app_user` FOREIGN KEY (`id_app_user`) REFERENCES `app_user` (`user_name`),
+  CONSTRAINT `fk_id_pay_method` FOREIGN KEY (`id_pay_method`) REFERENCES `pay_method` (`id_pay_method`),
+  CONSTRAINT `fk_id_purchase_history` FOREIGN KEY (`id_purchase_history`) REFERENCES `purchase_history` (`id_purchase_history`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `shopping_cart_BEFORE_INSERT` BEFORE INSERT ON `shopping_cart` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `shopping_cart_BEFORE_UPDATE` BEFORE UPDATE ON `shopping_cart` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
