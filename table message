@@ -1,0 +1,27 @@
+CREATE TABLE `message` (
+  `id_message` int NOT NULL AUTO_INCREMENT,
+  `id_chat_room` int NOT NULL,
+  `id_user` varchar(45) NOT NULL,
+  `text` varchar(1000) NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_message`),
+  KEY `fk_id_chat_room_idx` (`id_chat_room`),
+  KEY `fk_user_idx` (`id_user`),
+  CONSTRAINT `fk_id_chat_room` FOREIGN KEY (`id_chat_room`) REFERENCES `chat_room` (`id_chat_room`),
+  CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user`) REFERENCES `app_user` (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Mensajes de los chats privados';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `message_BEFORE_INSERT` BEFORE INSERT ON `message` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `message_BEFORE_UPDATE` BEFORE UPDATE ON `message` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
