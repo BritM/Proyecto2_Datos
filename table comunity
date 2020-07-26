@@ -1,0 +1,25 @@
+CREATE TABLE `comunity` (
+  `id_comunity` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `id_district` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_comunity`),
+  KEY `id_district_fk_idx` (`id_district`),
+  CONSTRAINT `id_district_fk` FOREIGN KEY (`id_district`) REFERENCES `district` (`id_district`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para las comunidades';
+
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `comunity_BEFORE_INSERT` BEFORE INSERT ON `comunity` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `comunity_BEFORE_UPDATE` BEFORE UPDATE ON `comunity` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
