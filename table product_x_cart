@@ -1,0 +1,24 @@
+CREATE TABLE `product_x_cart` (
+  `id_product` int NOT NULL,
+  `id_shopping_cart` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_product`,`id_shopping_cart`),
+  KEY `fk_shopping_cart_idx` (`id_shopping_cart`),
+  CONSTRAINT `fk_shopping_cart` FOREIGN KEY (`id_shopping_cart`) REFERENCES `shopping_cart` (`id_shopping_cart`),
+  CONSTRAINT `fk_x_product` FOREIGN KEY (`id_product`) REFERENCES `product` (`id_product`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla de productos por carro de compras';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `product_x_cart_BEFORE_INSERT` BEFORE INSERT ON `product_x_cart` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `product_x_cart_BEFORE_UPDATE` BEFORE UPDATE ON `product_x_cart` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
