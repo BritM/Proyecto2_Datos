@@ -1,0 +1,24 @@
+CREATE TABLE `product_x_wish_list` (
+  `id_product` int NOT NULL,
+  `id_wish_List` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_product`,`id_wish_List`),
+  KEY `fk_wish_list_idx` (`id_wish_List`),
+  CONSTRAINT `fk_wish_list` FOREIGN KEY (`id_wish_List`) REFERENCES `wish_list` (`id_wish_list`),
+  CONSTRAINT `fk_wish_product` FOREIGN KEY (`id_product`) REFERENCES `product` (`id_product`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `product_x_wish_List_BEFORE_INSERT` BEFORE INSERT ON `product_x_wish_list` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `product_x_wish_List_BEFORE_UPDATE` BEFORE UPDATE ON `product_x_wish_list` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
