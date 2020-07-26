@@ -1,0 +1,25 @@
+CREATE TABLE `district` (
+  `id_district` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `id_canton` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_district`),
+  KEY `id_canton_fk_idx` (`id_canton`),
+  CONSTRAINT `id_canton_fk` FOREIGN KEY (`id_canton`) REFERENCES `canton` (`id_canton`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para los distritos';
+
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `district_BEFORE_INSERT` BEFORE INSERT ON `district` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `district_BEFORE_UPDATE` BEFORE UPDATE ON `district` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
