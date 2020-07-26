@@ -1,0 +1,23 @@
+CREATE TABLE `parameter_value` (
+  `id_parameter_value` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `p_value` varchar(45) NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_parameter_value`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `parameter_value_BEFORE_INSERT` BEFORE INSERT ON `parameter_value` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `parameter_value_BEFORE_UPDATE` BEFORE UPDATE ON `parameter_value` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
