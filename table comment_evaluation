@@ -1,0 +1,24 @@
+CREATE TABLE `comment_evaluation` (
+  `id_comment_evaluation` int NOT NULL,
+  `comment` varchar(45) NOT NULL,
+  `id_comment_type` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_comment_evaluation`),
+  KEY `fk_comment_type_idx` (`id_comment_type`),
+  CONSTRAINT `fk_comment_type` FOREIGN KEY (`id_comment_type`) REFERENCES `comment_type` (`id_comment_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Comentarios y evaluación del usuario';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `comment_evaluation_BEFORE_INSERT` BEFORE INSERT ON `comment_evaluation` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `comment_evaluation_BEFORE_UPDATE` BEFORE UPDATE ON `comment_evaluation` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
