@@ -1,0 +1,26 @@
+CREATE TABLE `chat_room` (
+  `id_chat_room` int NOT NULL AUTO_INCREMENT,
+  `id_user1` varchar(45) NOT NULL,
+  `id_user2` varchar(45) NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_chat_room`),
+  KEY `fk_app_user1_idx` (`id_user1`),
+  KEY `fk_app_user2_idx` (`id_user2`),
+  CONSTRAINT `fk_app_user1` FOREIGN KEY (`id_user1`) REFERENCES `app_user` (`user_name`),
+  CONSTRAINT `fk_app_user2` FOREIGN KEY (`id_user2`) REFERENCES `app_user` (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Salas de chat para los mensajes';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `chat_room_BEFORE_INSERT` BEFORE INSERT ON `chat_room` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `chat_room_BEFORE_UPDATE` BEFORE UPDATE ON `chat_room` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
