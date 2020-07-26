@@ -1,0 +1,22 @@
+CREATE TABLE `comment_type` (
+  `id_comment_type` int NOT NULL AUTO_INCREMENT,
+  `description` varchar(45) NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_comment_type`),
+  UNIQUE KEY `description_UNIQUE` (`description`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tipo de comentario/review ya sea como comprador o vendedor';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `comment_type_BEFORE_INSERT` BEFORE INSERT ON `comment_type` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `comment_type_BEFORE_UPDATE` BEFORE UPDATE ON `comment_type` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
