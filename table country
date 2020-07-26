@@ -1,0 +1,21 @@
+CREATE TABLE `country` (
+  `id_country` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_country`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para países';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `country_BEFORE_INSERT` BEFORE INSERT ON `country` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `country_BEFORE_UPDATE` BEFORE UPDATE ON `country` FOR EACH ROW BEGIN
+SET NEW.last_modified_date= curdate();
+END$$
+DELIMITER ;
