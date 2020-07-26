@@ -1,0 +1,23 @@
+CREATE TABLE `wish_list` (
+  `id_wish_list` int NOT NULL AUTO_INCREMENT,
+  `id_app_user` varchar(45) NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_wish_list`),
+  UNIQUE KEY `id_app_user_UNIQUE` (`id_app_user`),
+  CONSTRAINT `fk_whish_app_user` FOREIGN KEY (`id_app_user`) REFERENCES `app_user` (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Lista de productos favoritos';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `wish_list_BEFORE_INSERT` BEFORE INSERT ON `wish_list` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `wish_list_BEFORE_UPDATE` BEFORE UPDATE ON `wish_list` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
