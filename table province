@@ -1,0 +1,24 @@
+CREATE TABLE `province` (
+  `id_province` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `id_country` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_province`),
+  KEY `id_country_idx` (`id_country`),
+  CONSTRAINT `id_country` FOREIGN KEY (`id_country`) REFERENCES `country` (`id_country`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para las provincias';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `province_BEFORE_INSERT` BEFORE INSERT ON `province` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `province_BEFORE_UPDATE` BEFORE UPDATE ON `province` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
