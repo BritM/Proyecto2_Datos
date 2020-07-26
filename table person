@@ -1,0 +1,34 @@
+CREATE TABLE `person` (
+  `id_card` int NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name1` varchar(45) NOT NULL,
+  `last_name2` varchar(45) NOT NULL,
+  `birth_date` date NOT NULL,
+  `gender` varchar(1) NOT NULL,
+  `photo` blob,
+  `phone_number` varchar(9) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `id_comunity` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_card`),
+  UNIQUE KEY `id_card_UNIQUE` (`id_card`),
+  KEY `fk_id_comunity_idx` (`id_comunity`),
+  CONSTRAINT `fk_id_comunity` FOREIGN KEY (`id_comunity`) REFERENCES `comunity` (`id_comunity`),
+  CONSTRAINT `person_email_ck` CHECK (regexp_like(`email`,_utf8mb4'^[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9._-]@[a-zA-Z0-9][a-zA-Z0-9._-]*[a-zA-Z0-9]\\.[a-zA-Z]{2,4}$')),
+  CONSTRAINT `person_gender_ck` CHECK ((`gender` in (_utf8mb4'F',_utf8mb4'M',_utf8mb4'X')))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para las personas';
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `person_BEFORE_INSERT` BEFORE INSERT ON `person` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `person_BEFORE_UPDATE` BEFORE UPDATE ON `person` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
