@@ -1,0 +1,31 @@
+CREATE TABLE `product` (
+  `id_product` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `price` int NOT NULL,
+  `visibility` tinyint NOT NULL DEFAULT '0',
+  `id_seller` varchar(45) NOT NULL,
+  `id_category` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`id_product`),
+  KEY `fk_id_seller_idx` (`id_seller`),
+  KEY `fk_id_category_idx` (`id_category`),
+  CONSTRAINT `fk_id_category` FOREIGN KEY (`id_category`) REFERENCES `category` (`id_category`),
+  CONSTRAINT `fk_id_seller` FOREIGN KEY (`id_seller`) REFERENCES `app_user` (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para los productos en el sistema';
+
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `product_BEFORE_INSERT` BEFORE INSERT ON `product` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `product_BEFORE_UPDATE` BEFORE UPDATE ON `product` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
