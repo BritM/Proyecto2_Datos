@@ -1,0 +1,30 @@
+CREATE TABLE `app_user` (
+  `user_name` varchar(45) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `seller_score` int NOT NULL DEFAULT '0',
+  `buyer_score` int NOT NULL DEFAULT '0',
+  `id_user_type` int NOT NULL,
+  `id_card` int NOT NULL,
+  `creation_date` date DEFAULT NULL,
+  `last_modified_date` date DEFAULT NULL,
+  PRIMARY KEY (`user_name`),
+  UNIQUE KEY `user_name_UNIQUE` (`user_name`),
+  KEY `fk_id_card` (`id_card`),
+  KEY `fk_id_user_type_idx` (`id_user_type`),
+  CONSTRAINT `fk_id_card` FOREIGN KEY (`id_card`) REFERENCES `person` (`id_card`),
+  CONSTRAINT `fk_id_user_type` FOREIGN KEY (`id_user_type`) REFERENCES `user_type` (`id_user_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para los usuarios'
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `app_user_BEFORE_INSERT` BEFORE INSERT ON `app_user` FOR EACH ROW BEGIN
+SET NEW.creation_date:= curdate();
+END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `proyect2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `app_user_BEFORE_UPDATE` BEFORE UPDATE ON `app_user` FOR EACH ROW BEGIN
+SET NEW.last_modified_date:= curdate();
+END$$
+DELIMITER ;
