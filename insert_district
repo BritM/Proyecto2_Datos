@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_district`(IN p_district_name VARCHAR(45), IN p_id_canton INT)
+BEGIN
+	INSERT INTO district (district_name, id_canton) VALUES (p_district_name, p_id_canton);
+END$$
+DELIMITER ;
