@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_chat_room`(IN p_id_chat_room INT)
+BEGIN
+	DELETE FROM chat_room WHERE id_chat_room=p_id_chat_room;
+END$$
+DELIMITER ;
