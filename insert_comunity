@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_comunity`(IN p_comunity_name VARCHAR(45), IN p_id_district INT)
+BEGIN
+	INSERT INTO comunity (comunity_name, id_district) VALUES (p_comunity_name, p_id_district);
+END$$
+DELIMITER ;
