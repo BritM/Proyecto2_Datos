@@ -1,6 +1,6 @@
 CREATE TABLE `district` (
   `id_district` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `district_name` varchar(45) NOT NULL,
   `id_canton` int NOT NULL,
   `creation_date` date DEFAULT NULL,
   `last_modified_date` date DEFAULT NULL,
