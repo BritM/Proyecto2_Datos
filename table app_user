@@ -1,6 +1,6 @@
 CREATE TABLE `app_user` (
   `user_name` varchar(45) NOT NULL,
-  `password` varchar(60) NOT NULL,
+  `user_password` varchar(255) NOT NULL,
   `seller_score` int NOT NULL DEFAULT '0',
   `buyer_score` int NOT NULL DEFAULT '0',
   `id_user_type` int NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE `app_user` (
   KEY `fk_id_user_type_idx` (`id_user_type`),
   CONSTRAINT `fk_id_card` FOREIGN KEY (`id_card`) REFERENCES `person` (`id_card`),
   CONSTRAINT `fk_id_user_type` FOREIGN KEY (`id_user_type`) REFERENCES `user_type` (`id_user_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para los usuarios'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para los usuarios';
 
 DELIMITER $$
 USE `proyect2`$$
