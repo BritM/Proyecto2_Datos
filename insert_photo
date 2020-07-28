@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_photo`(IN p_id_product INT, IN p_photo_file VARCHAR(200))
+BEGIN
+	INSERT INTO photo (id_product, photo_file) VALUES (p_id_product, LOAD_FILE(p_photo_file));
+END$$
+DELIMITER ;
