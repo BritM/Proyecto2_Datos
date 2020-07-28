@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_country`(IN p_id_country INT)
+BEGIN
+	DELETE FROM country WHERE id_country=p_id_country;
+END$$
+DELIMITER ;
