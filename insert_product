@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_product`(IN p_product_name VARCHAR(45), IN p_p_description VARCHAR(100), IN p_price INT, IN p_visibility BOOLEAN, IN p_id_seller VARCHAR(45), IN p_id_category INT)
+BEGIN
+	INSERT INTO product (product_name, p_description, price, visibility, id_seller, id_category) VALUES (p_product_name, p_p_description, p_price, p_visibility, p_id_seller, p_id_category);
+END$$
+DELIMITER ;
