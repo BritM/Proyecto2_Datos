@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_message_m_text`(IN p_id_message INT, IN p_m_text VARCHAR(1000))
+BEGIN
+UPDATE message SET m_text = p_m_text
+WHERE id_message = p_id_message;
+END$$
+DELIMITER ;
