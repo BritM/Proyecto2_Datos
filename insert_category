@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_category`(IN p_category_name VARCHAR(45), IN p_category_description VARCHAR(60))
+BEGIN
+	INSERT INTO category (category_name, category_description) VALUES (p_category_name, p_category_description);
+END$$
+DELIMITER ;
