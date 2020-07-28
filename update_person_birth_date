@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_person_birth_date`(IN p_id_card INT, IN p_birth_date DATE)
+BEGIN
+UPDATE person SET birth_date = p_birth_date
+WHERE id_card = p_id_card;
+END$$
+DELIMITER ;
