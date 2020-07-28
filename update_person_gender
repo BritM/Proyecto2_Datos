@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_person_gender`(IN p_id_card INT, IN p_gender VARCHAR(1))
+BEGIN
+UPDATE person SET gender = p_gender
+WHERE id_card = p_id_card;
+END$$
+DELIMITER ;
