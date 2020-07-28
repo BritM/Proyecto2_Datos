@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_canton`(IN p_canton_name VARCHAR(45), IN p_id_province INT)
+BEGIN
+	INSERT INTO canton (caton_name, id_province) VALUES (p_canton_name, p_id_province);
+END$$
+DELIMITER ;
