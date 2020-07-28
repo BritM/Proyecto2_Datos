@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_canton_id_province`(IN p_id_canton INT, IN p_id_province INT)
+BEGIN
+UPDATE canton SET id_province = p_id_province
+WHERE id_canton = p_id_canton;
+END$$
+DELIMITER ;
