@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_shopping_cart`(IN p_id_shopping_cart INT)
+BEGIN
+	DELETE FROM shopping_cart WHERE id_shopping_cart=p_id_shopping_cart;
+END$$
+DELIMITER ;
