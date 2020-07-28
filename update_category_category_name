@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_category_category_name`(IN p_id_category INT, IN p_category_name VARCHAR(45))
+BEGIN
+UPDATE category SET category_name = p_category_name
+WHERE id_category = p_id_category;
+END$$
+DELIMITER ;
