@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_product_x_wish_list`(IN p_id_product INT, IN p_id_wish_list INT)
+BEGIN
+	DELETE FROM product_x_wish_list WHERE id_product=p_id_product AND id_wish_list=p_id_wish_list;
+END$$
+DELIMITER ;
