@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_product_x_wish_list`(IN p_id_product INT, IN p_id_wish_list INT)
+BEGIN
+	INSERT INTO product_x_wish_list (id_product, id_wish_list) VALUES (p_id_product, p_id_wish_list);
+END$$
+DELIMITER ;
