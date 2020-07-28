@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_category`(IN p_id_category INT)
+BEGIN
+	DELETE FROM category WHERE id_category=p_id_category;
+END$$
+DELIMITER ;
