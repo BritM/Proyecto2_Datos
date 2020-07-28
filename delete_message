@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_message`(IN p_id_message INT)
+BEGIN
+	DELETE FROM message WHERE id_message =p_id_message;
+END$$
+DELIMITER ;
