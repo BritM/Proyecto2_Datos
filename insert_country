@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_country`(IN p_country_name VARCHAR(45))
+BEGIN
+	INSERT INTO country (country_name) VALUES (p_country_name);
+END$$
+DELIMITER ;
