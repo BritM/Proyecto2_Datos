@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_blog`(IN p_id_blog INT)
+BEGIN
+	DELETE FROM blog WHERE id_blog=p_id_blog;
+END$$
+DELIMITER ;
