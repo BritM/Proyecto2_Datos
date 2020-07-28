@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_chat_room`(IN p_id_user1 INT, IN p_id_user2 INT)
+BEGIN
+	INSERT INTO category (id_user1, id_user2) VALUES (p_id_user1, p_id_user2);
+END$$
+DELIMITER ;
