@@ -1,6 +1,6 @@
 CREATE TABLE `canton` (
   `id_canton` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `canton_name` varchar(45) NOT NULL,
   `id_province` int NOT NULL,
   `creation_date` date DEFAULT NULL,
   `last_modified_date` date DEFAULT NULL,
@@ -8,6 +8,7 @@ CREATE TABLE `canton` (
   KEY `id_province_fk` (`id_province`),
   CONSTRAINT `id_province_fk` FOREIGN KEY (`id_province`) REFERENCES `province` (`id_province`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para los cantones';
+
 
 DELIMITER $$
 USE `proyect2`$$
