@@ -1,6 +1,6 @@
 CREATE TABLE `parameter_value` (
   `id_parameter_value` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `p_name` varchar(45) NOT NULL,
   `p_value` varchar(45) NOT NULL,
   `creation_date` date DEFAULT NULL,
   `last_modified_date` date DEFAULT NULL,
