@@ -1,7 +1,7 @@
 CREATE TABLE `user_type` (
   `id_user_type` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `description` varchar(45) NOT NULL,
+  `type_name` varchar(45) NOT NULL,
+  `t_description` varchar(45) NOT NULL,
   `creation_date` date DEFAULT NULL,
   `last_modified_date` date DEFAULT NULL,
   PRIMARY KEY (`id_user_type`),
