@@ -1,6 +1,6 @@
 CREATE TABLE `comment_type` (
   `id_comment_type` int NOT NULL AUTO_INCREMENT,
-  `description` varchar(45) NOT NULL,
+  `comment_description` varchar(45) NOT NULL,
   `creation_date` date DEFAULT NULL,
   `last_modified_date` date DEFAULT NULL,
   PRIMARY KEY (`id_comment_type`),
