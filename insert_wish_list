@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_wish_list`(IN p_id_app_user VARCHAR(45))
+BEGIN
+	INSERT INTO wish_list (id_app_user) VALUES (p_id_app_user);
+END$$
+DELIMITER ;
