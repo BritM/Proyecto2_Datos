@@ -1,6 +1,6 @@
 CREATE TABLE `comment_evaluation` (
-  `id_comment_evaluation` int NOT NULL,
-  `comment` varchar(45) NOT NULL,
+  `id_comment_evaluation` int NOT NULL AUTO_INCREMENT,
+  `e_comment` varchar(1000) NOT NULL,
   `id_comment_type` int NOT NULL,
   `creation_date` date DEFAULT NULL,
   `last_modified_date` date DEFAULT NULL,
@@ -8,6 +8,7 @@ CREATE TABLE `comment_evaluation` (
   KEY `fk_comment_type_idx` (`id_comment_type`),
   CONSTRAINT `fk_comment_type` FOREIGN KEY (`id_comment_type`) REFERENCES `comment_type` (`id_comment_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Comentarios y evaluación del usuario';
+
 
 DELIMITER $$
 USE `proyect2`$$
