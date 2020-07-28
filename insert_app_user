@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_app_user`(IN p_user_name VARCHAR(45), IN p_user_password VARCHAR(60), IN p_id_user_type INT, IN p_id_card INT)
+BEGIN
+	INSERT INTO app_user (user_name, user_password, id_user_type, id_card) VALUES (p_user_name, SHA1(p_user_password), p_id_user_type, p_id_card);
+END$$
+DELIMITER ;
