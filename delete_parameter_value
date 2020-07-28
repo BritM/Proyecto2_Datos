@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_parameter_value`(IN p_id_parameter_value INT)
+BEGIN
+	DELETE FROM parameter_value WHERE id_parameter_value =p_id_parameter_value;
+END$$
+DELIMITER ;
