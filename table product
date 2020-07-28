@@ -1,8 +1,10 @@
 CREATE TABLE `product` (
   `id_product` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `description` varchar(100) NOT NULL,
+  `product_name` varchar(45) NOT NULL,
+  `p_description` varchar(100) NOT NULL,
   `price` int NOT NULL,
+  `id_shopping_cart` int DEFAULT NULL,
+  `id_purchase_history` int DEFAULT NULL,
   `visibility` tinyint NOT NULL DEFAULT '0',
   `id_seller` varchar(45) NOT NULL,
   `id_category` int NOT NULL,
@@ -11,8 +13,12 @@ CREATE TABLE `product` (
   PRIMARY KEY (`id_product`),
   KEY `fk_id_seller_idx` (`id_seller`),
   KEY `fk_id_category_idx` (`id_category`),
+  KEY `fk_id_shopping_cart_idx` (`id_shopping_cart`),
+  KEY `fk_id_purchase_history_idx` (`id_purchase_history`),
   CONSTRAINT `fk_id_category` FOREIGN KEY (`id_category`) REFERENCES `category` (`id_category`),
-  CONSTRAINT `fk_id_seller` FOREIGN KEY (`id_seller`) REFERENCES `app_user` (`user_name`)
+  CONSTRAINT `fk_id_seller` FOREIGN KEY (`id_seller`) REFERENCES `app_user` (`user_name`),
+  CONSTRAINT `fk_product_id_purchase_history` FOREIGN KEY (`id_purchase_history`) REFERENCES `purchase_history` (`id_purchase_history`),
+  CONSTRAINT `fk_product_id_shopping_cart` FOREIGN KEY (`id_shopping_cart`) REFERENCES `shopping_cart` (`id_shopping_cart`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Tabla para los productos en el sistema';
 
 
