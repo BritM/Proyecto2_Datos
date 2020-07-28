@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_comunity_name`(IN p_id_comunity INT, IN p_comunity_name VARCHAR(45))
+BEGIN
+	UPDATE comunity SET comunity_name = p_comunity_name
+    WHERE id_comunity = p_id_comunity;
+END$$
+DELIMITER ;
