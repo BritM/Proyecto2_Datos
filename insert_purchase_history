@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_purchase_history`(IN p_id_app_user VARCHAR(45))
+BEGIN
+	INSERT INTO purchase_history (id_app_user) VALUES (p_id_app_user);
+END$$
+DELIMITER ;
