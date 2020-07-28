@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_parameter_value_p_value`(IN p_id_parameter_value INT, IN p_p_value VARCHAR(45))
+BEGIN
+UPDATE parameter_value SET p_value = p_p_value
+WHERE id_parameter_value = p_id_parameter_value;
+END$$
+DELIMITER ;
