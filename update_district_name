@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_district_name`(IN p_id_district INT, IN p_district_name VARCHAR(45))
+BEGIN
+	UPDATE district SET district_name = p_district_name
+    WHERE id_district = p_id_district;
+END$$
+DELIMITER ;
