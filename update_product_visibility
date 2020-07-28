@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_product_visibility`(IN p_id_product INT, IN p_visibility BOOLEAN)
+BEGIN
+UPDATE product SET visibility = p_visibility
+WHERE id_product= p_id_product;
+END$$
+DELIMITER ;
