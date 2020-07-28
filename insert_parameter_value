@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_parameter_value`(IN p_p__name VARCHAR(45), IN p_p_value VARCHAR(45))
+BEGIN
+	INSERT INTO parameter_value (p_name, p_value) VALUES (p_p_name, p_p_value);
+END$$
+DELIMITER ;
