@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_comment_evaluation_id_comment_type`(IN p_id_comment_evaluation INT, IN p_id_comment_type INT)
+BEGIN
+UPDATE comment_evaluation SET id_comment_type = p_id_comment_type 
+WHERE id_comment_evaluation = p_id_comment_evaluation;
+END$$
+DELIMITER ;
