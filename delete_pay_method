@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_pay_method`(IN p_id_pay_method INT)
+BEGIN
+	DELETE FROM pay_method WHERE id_pay_method=p_id_pay_method;
+END$$
+DELIMITER ;
