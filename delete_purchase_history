@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_purchase_history`(IN p_id_purchase_history INT)
+BEGIN
+	DELETE FROM purchase_history WHERE id_purchase_history =p_id_purchase_history;
+END$$
+DELIMITER ;
