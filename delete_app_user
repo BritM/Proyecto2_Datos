@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_app_user`(IN p_user_name INT)
+BEGIN
+	DELETE FROM app_user WHERE user_name =p_user_name;
+END$$
+DELIMITER ;
