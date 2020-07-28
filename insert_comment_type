@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_comment_type`(IN p_comment_description VARCHAR(45))
+BEGIN
+	INSERT INTO comment_type (comment_description) VALUES (p_comment_description);
+END$$
+DELIMITER ;
