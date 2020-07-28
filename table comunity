@@ -1,6 +1,6 @@
 CREATE TABLE `comunity` (
   `id_comunity` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `comunity_name` varchar(45) NOT NULL,
   `id_district` int NOT NULL,
   `creation_date` date DEFAULT NULL,
   `last_modified_date` date DEFAULT NULL,
