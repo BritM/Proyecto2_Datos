@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_person`(IN p_id_card INT, IN p_first_name VARCHAR(45), IN p_last_name1 VARCHAR(45), IN p_last_name2 VARCHAR(45), IN p_birth_date DATE, IN p_gender VARCHAR(1), IN p_photo VARCHAR(200), IN p_phone_number VARCHAR(9), IN p_email VARCHAR(60), IN p_id_comunity INT)
+BEGIN
+	INSERT INTO person (id_card, first_name, last_name1, last_name2, birth_date, gender, photo, phone_number, email, id_comunity) VALUES (p_id_card, p_first_name, p_last_name1, p_last_name2, p_birth_date, p_gender, LOAD_FILE(p_photo), p_phone_number, p_email, p_id_comunity);
+END$$
+DELIMITER ;
