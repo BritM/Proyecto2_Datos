@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_canton`(IN p_id_canton INT)
+BEGIN
+	DELETE FROM canton WHERE id_canton=p_id_canton;
+END$$
+DELIMITER ;
