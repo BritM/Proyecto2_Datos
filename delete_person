@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_person`(IN p_id_card INT)
+BEGIN
+	DELETE FROM person WHERE id_card=p_id_card;
+END$$
+DELIMITER ;
