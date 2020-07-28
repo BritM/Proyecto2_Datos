@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_province_id_country`(IN p_id_province INT, IN p_id_country INT)
+BEGIN
+UPDATE province SET id_country = p_id_country
+WHERE id_province = p_id_province;
+END$$
+DELIMITER ;
