@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_product_id_category`(IN p_id_product INT, IN p_id_category INT)
+BEGIN
+UPDATE product SET id_category = p_id_category
+WHERE id_product= p_id_product;
+END$$
+DELIMITER ;
