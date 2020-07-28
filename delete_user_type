@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_user_type`(IN p_id_user_type INT)
+BEGIN
+	DELETE FROM user_type WHERE id_user_type =p_id_user_type;
+END$$
+DELIMITER ;
