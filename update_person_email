@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_person_email`(IN p_id_card INT, IN p_email VARCHAR(60))
+BEGIN
+UPDATE person SET email = p_email
+WHERE id_card = p_id_card;
+END$$
+DELIMITER ;
