@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_photo`(IN p_id_photo INT)
+BEGIN
+	DELETE FROM photo WHERE id_photo=p_id_photo;
+END$$
+DELIMITER ;
