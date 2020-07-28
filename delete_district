@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_district`(IN p_id_district INT)
+BEGIN
+	DELETE FROM district WHERE id_district=p_id_district;
+END$$
+DELIMITER ;
