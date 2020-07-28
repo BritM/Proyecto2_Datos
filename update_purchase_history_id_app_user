@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_purchase_history_id_app_user`(IN p_id_purchase_history INT, IN p_id_app_user VARCHAR(45))
+BEGIN
+UPDATE purchase_history SET id_app_user = p_id_app_user
+WHERE id_purchase_history = p_id_purchase_history;
+END$$
+DELIMITER ;
