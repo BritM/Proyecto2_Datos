@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_app_user_buyer_score`(IN p_user_name varchar(45), IN p_buyer_score INT)
+BEGIN
+UPDATE app_user SET buyer_score = p_buyer_score
+WHERE user_name = p_user_name;
+END$$
+DELIMITER ;
