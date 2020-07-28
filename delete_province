@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_province`(IN p_id_province INT)
+BEGIN
+	DELETE FROM province WHERE id_province=p_id_province;
+END$$
+DELIMITER ;
