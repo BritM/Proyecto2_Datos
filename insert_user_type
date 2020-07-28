@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_user_type`(IN p_type_name VARCHAR(45), IN p_t_description VARCHAR(45))
+BEGIN
+	INSERT INTO user_type (type_name, t_description) VALUES (p_type_name, p_t_description);
+END$$
+DELIMITER ;
