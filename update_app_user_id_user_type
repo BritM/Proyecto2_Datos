@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_app_user_id_user_type`(IN p_user_name varchar(45), IN p_id_user_type INT)
+BEGIN
+UPDATE app_user SET id_user_type = p_id_user_type
+WHERE user_name = p_user_name;
+END$$
+DELIMITER ;
