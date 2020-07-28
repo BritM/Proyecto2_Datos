@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_comunity`(IN p_id_comunity INT)
+BEGIN
+	DELETE FROM comunity WHERE id_comunity=p_id_comunity;
+END$$
+DELIMITER ;
