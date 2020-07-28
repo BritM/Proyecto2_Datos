@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_shopping_cart`(IN p_id_pay_method INT, IN p_id_app_user VARCHAR(45), IN p_id_purchase_history INT)
+BEGIN
+	INSERT INTO shopping_cart (id_pay_method, id_app_user, id_purchase_history) VALUES (p_id_pay_method, p_id_app_user, p_id_purchase_history);
+END$$
+DELIMITER ;
