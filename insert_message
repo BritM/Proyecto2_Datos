@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_message`(IN p_id_chat_room INT, IN p_id_user INT, IN p_m_text VARCHAR(1000))
+BEGIN
+	INSERT INTO message (id_chat_room, id_user, m_text) VALUES (p_id_chat_room, p_id_user, p_m_text);
+END$$
+DELIMITER ;
