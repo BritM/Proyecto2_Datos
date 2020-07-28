@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_app_user_pasword`(IN p_user_name varchar(45), IN p_user_password VARCHAR(60))
+BEGIN
+UPDATE app_user SET user_password = SHA1(p_user_password)
+WHERE user_name = p_user_name;
+END$$
+DELIMITER ;
