@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_person_photo`(IN p_id_card INT, IN p_photo VARCHAR(200))
+BEGIN
+UPDATE person SET photo = LOAD_FILE(p_photo)
+WHERE id_card = p_id_card;
+END$$
+DELIMITER ;
