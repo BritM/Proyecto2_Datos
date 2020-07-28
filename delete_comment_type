@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_comment_type`(IN p_id_comment_type INT)
+BEGIN
+	DELETE FROM comment_type WHERE id_comment_type =p_id_comment_type;
+END$$
+DELIMITER ;
