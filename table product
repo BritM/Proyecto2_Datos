@@ -32,6 +32,16 @@ DELIMITER ;
 DELIMITER $$
 USE `proyect2`$$
 CREATE DEFINER=`root`@`localhost` TRIGGER `product_BEFORE_UPDATE` BEFORE UPDATE ON `product` FOR EACH ROW BEGIN
+DECLARE p_user_name VARCHAR(45);
+SELECT user_name INTO p_user_name FROM actual_user WHERE table_id =1;
+
+IF (NEW.price <> OLD.price) THEN
+	INSERT INTO blog (id_app_user, updated_table, updated_column, previous_value, new_value, last_modified) VALUES (p_user_name, 'product', 'price', OLD.price, NEW.price, curdate());
+    
+ELSEIF (NEW.id_seller <> OLD.id_seller) THEN
+	INSERT INTO blog (id_app_user, updated_table, updated_column, previous_value, new_value, last_modified) VALUES (p_user_name, 'product', 'id_seller', OLD.id_seller, NEW.id_seller, curdate());
+END IF;
+
 SET NEW.last_modified_date:= curdate();
 END$$
 DELIMITER ;
