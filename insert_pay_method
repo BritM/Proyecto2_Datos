@@ -1,6 +1,6 @@
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_pay_method`(IN p_details VARCHAR(60))
 BEGIN
-	INSERT INTO canton (details) VALUES (p_details);
+	INSERT INTO pay_method (details) VALUES (p_details);
 END$$
 DELIMITER ;
