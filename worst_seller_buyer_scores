@@ -1,0 +1,47 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `worst_seller_buyer_scores`(IN p_filter VARCHAR(1), p_comunity INT, p_district INT, p_canton INT, p_province INT, p_country INT)
+BEGIN
+
+IF p_filter= 'Y' THEN
+
+WITH persons_per_place AS (SELECT *
+FROM proyect2.person per
+INNER JOIN proyect2.comunity c
+ON per.id_comunity = c.id_comunity
+INNER JOIN proyect2.district d
+ON c.id_district = d.id_district
+INNER JOIN proyect2.canton ca
+ON d.id_canton = ca.id_canton
+INNER JOIN proyect2.province p
+ON ca.id_province= p.id_province
+INNER JOIN proyect2.country co
+ON p.id_country= co_id_country
+WHERE  (c.id_comunity= nvl(p_comunity, c.id_comunity) or c.id_comunity IS Null)
+        and (d.id_district= nvl(p_district, d.id_district) or d.id_district IS Null)
+        and (ca.id_canton= nvl(p_canton, ca.id_canton) or ca.id_canton IS Null)
+        and (p.id_province= nvl(p_province, p.id_province) or p.id_province IS Null)
+        and (co.id_country= nvl(p_country, co.id_country) or co.id_country IS Null))
+
+SELECT au.user_name, 'buyer' as score_type, au.buyer_score as score
+FROM app_user au
+INNER JOIN persons_per_place ppp
+ON au.id_card = ppp.id_card
+UNION ALL
+SELECT au.user_name, 'seller' as score_type, au.seller_score as score
+FROM app_user au
+INNER JOIN persons_per_place ppp
+ON au.id_card = ppp.id_card
+ORDER BY score ASC;
+
+ELSE
+
+SELECT au.user_name, 'buyer' as score_type, au.buyer_score as score
+FROM app_user au
+UNION ALL
+SELECT au.user_name, 'seller' as score_type, au.seller_score as score
+FROM app_user au
+ORDER BY score ASC;
+
+END IF;
+END$$
+DELIMITER ;
