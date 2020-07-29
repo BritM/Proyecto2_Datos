@@ -1,0 +1,23 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `purchases_over_1000`(IN p_filter VARCHAR(1), IN p_id_app_user VARCHAR(45), IN p_id_category INT)
+BEGIN
+
+IF p_filter= 'Y' THEN
+SELECT p.product_name, p.price
+FROM product p
+INNER JOIN proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history
+WHERE (ph.id_app_user= nvl(p_id_app_user, ph.id_app_user) or ph.id_app_user IS Null)
+AND (p.id_category= nvl(p_id_category, p.id_category) or p.id_category IS Null)
+AND (p.price > 1000);
+
+ELSE
+
+SELECT p.product_name, p.price
+FROM product p
+INNER JOIN proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history;
+
+END IF;
+END$$
+DELIMITER ;
