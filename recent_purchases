@@ -1,0 +1,36 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `recent_purchases`(IN p_filter INT, IN p_id_app_user VARCHAR(45))
+BEGIN
+
+IF p_filter= 3 THEN
+
+SELECT p.product_name, p.price FROM proyect2.product p
+INNER JOIN  proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history
+WHERE  (ph.id_app_user= nvl(ph_id_app_user, ph.id_app_user) or ph.id_app_user IS Null)
+AND DATE_ADD(ph.creation_date, INTERVAL 3 MONTH ) >= CURDATE();
+
+ELSEIF p_filter= 6 THEN
+
+SELECT p.product_name, p.price FROM proyect2.product p
+INNER JOIN  proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history
+WHERE  (ph.id_app_user= nvl(ph_id_app_user, ph.id_app_user) or ph.id_app_user IS Null)
+AND DATE_ADD(ph.creation_date, INTERVAL 6 MONTH ) >= CURDATE();
+
+ELSEIF p_filter= 1 THEN
+
+SELECT p.product_name, p.price FROM proyect2.product p
+INNER JOIN  proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history
+WHERE  (ph.id_app_user= nvl(ph_id_app_user, ph.id_app_user) or ph.id_app_user IS Null)
+AND DATE_ADD(ph.creation_date, INTERVAL 1 YEAR) >= CURDATE();
+
+ELSE
+SELECT p.product_name, p.price FROM proyect2.product p
+INNER JOIN  proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history
+WHERE  (ph.id_app_user= nvl(ph_id_app_user, ph.id_app_user) or ph.id_app_user IS Null);
+END IF;
+END$$
+DELIMITER ;
