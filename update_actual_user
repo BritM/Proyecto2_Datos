@@ -1,0 +1,7 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_actual_user`(IN p_user_name VARCHAR(45))
+BEGIN
+	REPLACE INTO actual_user (table_id, user_name) VALUE (1, p_user_name);
+
+END$$
+DELIMITER ;
