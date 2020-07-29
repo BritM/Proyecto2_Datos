@@ -1,0 +1,50 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `top_n_users_with_most_sales`(p_filter VARCHAR(1), p_comunity INT, p_district INT, p_canton INT, p_province INT, p_country INT)
+BEGIN
+DECLARE n_value INT;
+SELECT p_value INTO n_value FROM proyect2.parameter_value WHERE p_name= "top_n_most_sales";
+
+if p_filter='Y' THEN
+
+WITH persons_per_place AS (SELECT *
+FROM proyect2.person per
+INNER JOIN proyect2.comunity c
+ON per.id_comunity = c.id_comunity
+INNER JOIN proyect2.district d
+ON c.id_district = d.id_district
+INNER JOIN proyect2.canton ca
+ON d.id_canton = ca.id_canton
+INNER JOIN proyect2.province p
+ON ca.id_province= p.id_province
+INNER JOIN proyect2.country co
+ON p.id_country= co_id_country
+WHERE  (c.id_comunity= nvl(p_comunity, c.id_comunity) or c.id_comunity IS Null)
+        and (d.id_district= nvl(p_district, d.id_district) or d.id_district IS Null)
+        and (ca.id_canton= nvl(p_canton, ca.id_canton) or ca.id_canton IS Null)
+        and (p.id_province= nvl(p_province, p.id_province) or p.id_province IS Null)
+        and (co.id_country= nvl(p_country, co.id_country) or co.id_country IS Null))
+
+SELECT au.user_name, COUNT(*) sales
+FROM product p
+INNER JOIN proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history
+INNER JOIN proyect2.app_user au
+ON p.id_seller= au.user_name
+INNER JOIN proyect2.persons_per_place ppp
+ON au.id_card= ppp._id_card
+GROUP BY p.id_seller
+ORDER BY COUNT(*) DESC
+LIMIT n_value;
+
+ELSE
+
+SELECT p.id_seller user_name, COUNT(*) sales FROM
+proyect2.product p
+INNER JOIN proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history
+GROUP BY p.id_seller
+ORDER BY COUNT(*) DESC
+LIMIT n_value;
+END IF;
+END$$
+DELIMITER ;
