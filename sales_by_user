@@ -1,0 +1,20 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sales_by_user`(IN p_filter VARCHAR(1), IN p_id_seller VARCHAR(45))
+BEGIN
+
+IF p_filter= 'Y' THEN
+SELECT p.product_name, p.price
+FROM product p
+INNER JOIN proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history
+WHERE (p.id_seller= nvl(p_id_seller, p.id_seller) or p.id_seller IS Null);
+
+ELSE
+SELECT p.product_name, p.price
+FROM product p
+INNER JOIN proyect2.purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history;
+
+END IF;
+END$$
+DELIMITER ;
