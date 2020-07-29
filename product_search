@@ -1,0 +1,28 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `product_search`(IN p_filter VARCHAR(1), IN p_product_name VARCHAR(45), IN p_id_seller VARCHAR(45), IN p_id_category INT, IN p_max_price INT)
+BEGIN
+
+if p_filter='Y' THEN
+
+WITH products AS (SELECT * 
+FROM proyect2.product p
+WHERE  (p.product_name= nvl(p_product_name, p.product_name) or p.product_name IS Null)
+AND (p.id_seller= nvl(p_id_seller, p.id_seller) or p.id_seller IS Null)
+AND (p.id_category= nvl(p_id_category, p.id_category) or p.id_category IS Null)
+AND (p.price <= nvl(p_max_price, p.price) or p.price IS Null))
+
+SELECT p.product_name, p.id_seller, c.category_name, p.price
+FROM products ps
+INNER JOIN proyect2.category c
+ON ps.id_category = c.id_category;
+
+ELSE
+
+SELECT p.product_name, p.id_seller, c.category_name, p.price FROM
+proyect2.product p
+INNER JOIN proyect2.category c
+ON p.id_category = c.id_category
+ORDER BY p.price;
+END IF;
+END$$
+DELIMITER ;
