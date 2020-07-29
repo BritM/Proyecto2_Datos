@@ -1,0 +1,6 @@
+CREATE TABLE `actual_user` (
+  `table_id` int NOT NULL,
+  `user_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`table_id`),
+  UNIQUE KEY `table_id_UNIQUE` (`table_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Usuario actual';
