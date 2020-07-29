@@ -1,9 +1,10 @@
 CREATE TABLE `blog` (
   `id_blog` int NOT NULL AUTO_INCREMENT,
   `id_app_user` varchar(45) DEFAULT NULL,
-  `table` varchar(45) DEFAULT NULL,
-  `column` varchar(45) DEFAULT NULL,
+  `updated_table` varchar(45) DEFAULT NULL,
+  `updated_column` varchar(45) DEFAULT NULL,
   `pevious_value` varchar(45) DEFAULT NULL,
+  `new_value` varchar(45) DEFAULT NULL,
   `last_modified` date DEFAULT NULL,
   PRIMARY KEY (`id_blog`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bitácora del sistema';
