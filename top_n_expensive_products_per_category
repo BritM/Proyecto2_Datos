@@ -1,0 +1,28 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `top_n_expensive_products_per_category`(IN p_filter VARCHAR(1), IN p_category INT)
+BEGIN
+DECLARE n_value INT;
+SELECT p_value INTO n_value FROM proyect2.parameter_value WHERE p_name= "top_n_expensive_per_category";
+
+if p_filter='Y' THEN
+WITH categories AS (SELECT * FROM
+proyect2.product p
+WHERE p.id_category= p_category)
+
+SELECT p.product_name, c.category_name, p.price FROM categories
+INNER JOIN proyect2.category c
+ON p.id_category = c.id_category
+ORDER BY p.price
+LIMIT n_value;
+
+ELSE
+
+SELECT p.product_name, c.category_name, p.price FROM
+proyect2.product p
+INNER JOIN proyect2.category c
+ON p.id_category = c.id_category
+ORDER BY p.price
+LIMIT n_value;
+END IF;
+END$$
+DELIMITER ;
