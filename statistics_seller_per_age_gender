@@ -1,0 +1,28 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `statistics_seller_per_age_gender`()
+BEGIN
+WITH sellers as (
+SELECT * FROM 
+product p
+INNER JOIN purchase_history ph
+ON p.id_purchase_history= ph.id_purchase_history
+INNER JOIN app_user au
+ON p.id_seller= au.user_name
+INNER JOIN person per
+ON au.id_card= per.id_card)
+
+SELECT  age, SUM(gender = 'F') Female, SUM(gender = 'M') Male, SUM(gender = 'X') Other, COUNT(*) Total
+FROM
+(
+SELECT  CASE 
+     WHEN FLOOR(DATEDIFF(CURDATE(), birth_date) / 365) BETWEEN 0 AND 18 THEN '00-18'
+     WHEN FLOOR(DATEDIFF(CURDATE(), birth_date) / 365) BETWEEN 19 AND 30 THEN '19-30'
+     WHEN FLOOR(DATEDIFF(CURDATE(), birth_date) / 365) BETWEEN 31 AND 50 THEN '31-50'
+     WHEN FLOOR(DATEDIFF(CURDATE(), birth_date) / 365) BETWEEN 60 AND 80 THEN '60-80'
+     WHEN FLOOR(DATEDIFF(CURDATE(), birth_date) / 365) > 80 THEN '80+'
+END age,
+gender FROM  sellers) ageList
+GROUP BY age;
+
+END$$
+DELIMITER ;
