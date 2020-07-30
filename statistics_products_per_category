@@ -1,0 +1,15 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `statistics_products_per_category`()
+BEGIN
+WITH products AS(
+SELECT *
+FROM product p
+INNER JOIN category c
+ON p.id_category = c.id_category)
+
+SELECT c.category_name, COUNT(*) as total, (COUNT(*)*100/ (SELECT COUNT(*) FROM products)) as percentage
+FROM products
+GROUP BY p.id_category;
+
+END$$
+DELIMITER ;
