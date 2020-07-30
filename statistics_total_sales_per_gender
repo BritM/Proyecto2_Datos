@@ -1,0 +1,14 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `statistics_total_sales_per_gender`()
+BEGIN
+SELECT per.gender, SUM(p.price) total
+FROM product p
+INNER JOIN purchase_history ph
+ON p.id_purchase_history =ph.id_purchase_history
+INNER JOIN app_user au
+ON p.id_seller = au.user_name
+INNER JOIN person per
+ON au.id_card = per.id_card
+GROUP BY per.gender;
+END$$
+DELIMITER ;
