@@ -1,0 +1,6 @@
+CREATE EVENT job
+  ON SCHEDULE
+    EVERY 1 DAY
+    STARTS '2020-07-30 00:00:01' ON COMPLETION PRESERVE ENABLE 
+  DO
+  CALL `proyect2`.`job_procedure`();
