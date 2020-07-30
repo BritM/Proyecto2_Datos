@@ -1,0 +1,26 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `job_procedure`()
+BEGIN
+
+DELETE FROM top_5_seller_score;
+
+INSERT INTO top_5_seller_score (user_name, score)
+SELECT user_name, seller_score
+FROM app_user
+ORDER BY seller_score
+LIMIT 5;
+
+DELETE FROM top_10_ventas;
+
+INSERT INTO top_10_ventas (user_name, sold)
+SELECT id_seller, SUM(p.price)
+FROM product p
+INNER JOIN purchase_history ph
+ON p.id_purchase_history = ph.id_purchase_history
+WHERE ph.creation_date >= DATE_SUB( curdate(), INTERVAL 1 DAY)
+GROUP BY p.id_seller
+ORDER BY SUM(p.price) DESC;
+
+
+END$$
+DELIMITER ;
